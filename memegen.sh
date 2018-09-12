@@ -5,7 +5,16 @@
 WRKDIR="$(mktemp -d)"
 trap "rm -rf ${WRKDIR}" INT TERM EXIT
 
-IMGDIR="$(readlink -f $(dirname ${0})/imgs)"
+# CHECK OSTYPE
+if [[ "$OSTYPE" == "darwin"* ]] ; then
+    READLINK="greadlink"
+    OPENER="open"
+else
+    READLINK="readlink"
+    OPENER="xdg-open"
+fi
+
+IMGDIR="$($READLINK -f $(dirname ${0})/imgs)"
 JQ="jq -r"
 
 NAME="${1}"
@@ -64,4 +73,4 @@ fi
 echo "[+] Uploaded to https://imgur.com/${HASH}"
 
 echo '[+] Opening image in browser'
-xdg-open "https://imgur.com/${HASH}"
+$OPENER "https://imgur.com/${HASH}"
