@@ -1,0 +1,10 @@
+{
+    "fill": "blue",
+    "font_size": 32,
+    "num_annotations": 3,
+    "annotations": [
+        "+900+200",
+        "+620+80",
+        "+260+140"
+    ]
+}
